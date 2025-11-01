@@ -13,24 +13,24 @@ const geistMono = Geist_Mono({
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-full bg-black relative overflow-hidden text-white">
-      {/* Background Glow */}
+    <div className="min-h-screen w-full bg-black text-white relative overflow-x-hidden">
+      {/* Background subtle glow (now fixed) */}
       <div
-        className="absolute inset-0 z-0 pointer-events-none"
+        className="fixed inset-0 z-0 pointer-events-none"
         style={{
           background: `
             radial-gradient(
               circle at center,
               rgba(255, 255, 255, 0.08) 0%,
-              rgba(255, 255, 255, 0.04) 20%,
-              rgba(0, 0, 0, 0.0) 60%
+              rgba(255, 255, 255, 0.04) 25%,
+              rgba(0, 0, 0, 0.0) 70%
             )
           `,
         }}
       />
 
-      {/* Navbar */}
-      <div className="w-full h-[7%] absolute top-0 left-0 bg-black border-b border-[#808080]/50 flex items-center justify-between pl-6 z-20">
+      {/* Navbar (unchanged) */}
+      <div className="w-full h-[7%] fixed top-0 left-0 bg-black border-b border-[#808080]/50 flex items-center justify-between pl-6 z-20">
         {/* Left side */}
         <div
           className={`flex ${geistSans.className} font-mono h-full pr-20 items-center gap-3 text-white`}
@@ -76,54 +76,75 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Main Section */}
-      <main
-        className={`relative z-10 flex flex-col md:flex-row justify-center min-h-screen pt-24 px-10 gap-10 ${geistMono.className}`}
-      >
-        {/* Left: Hero Text */}
-        <div className="flex w-full md:w-1/2 justify-center mt-50 h-full items-center">
-          <div className="max-w-xl  space-y-6 text-center md:text-left">
-            <h1 className="text-5xl md:text-5xl font-extrabold leading-tight">
-              <span className="block text-gray-100">Compress Smarter.</span>
-              <span className="block text-gray-400">Not Theoretically.</span>
-            </h1>
-
-            <p className="text-gray-400 leading-relaxed">
-              Built on the practical limits of hash collision finding — Byte
-              Squeeze_ achieves compression rates that defy theory but thrive in
-              reality.
-            </p>
-          </div>
-        </div>
-
-        {/* Right: Upload + Compression Output */}
-        <div className="flex w-full md:w-1/2 justify-center items-center">
-          <div className="bg-zinc-900/50 border border-zinc-700 p-8 shadow-xl w-full max-w-md">
-            <h2 className="text-xl font-semibold text-gray-200 mb-4">
-              Upload & Compress
-            </h2>
-            <input
-              type="file"
-              className="w-full bg-zinc-800 border border-zinc-600 text-gray-300  px-4 py-2 cursor-pointer focus:outline-none"
+      {/* Scrollable content area */}
+      <div className="relative z-10 ">
+        {/* Main Hero Section */}
+        <main
+          className={`flex flex-col items-center justify-center min-h-screen text-center px-6 ${geistMono.className}`}
+        >
+          {/* Illustration (optional) */}
+          <div className="flex justify-center mb-10">
+            <img
+              src="/your-illustration.png"
+              alt="Illustration"
+              className="w-64 h-auto opacity-90"
             />
-            <button className="mt-4 w-full cursor-pointer bg-white/10 hover:bg-white/20 transition-all py-2  text-gray-200">
-              Compress File
-            </button>
+          </div>
 
-            <div className="mt-6 text-sm text-gray-400 border-t border-zinc-700 pt-4">
-              <p>
-                Compression Ratio: <span className="text-gray-200">85%</span>
-              </p>
-              <p>
-                Original Size: <span className="text-gray-200">2.4 MB</span>
-              </p>
-              <p>
-                Compressed Size: <span className="text-gray-200">0.36 MB</span>
-              </p>
+          {/* Headline */}
+          <h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+            Compress Smarter. <br />
+            <span className="text-gray-400">Zero Theory, All Practice.</span>
+          </h1>
+
+          {/* Subtext */}
+          <p className="text-gray-400 max-w-2xl leading-relaxed mb-10">
+            Byte Squeeze_ redefines compression by leveraging practical
+            collision limits — achieving real-world results where theory stops
+            short.
+          </p>
+
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <button className="px-8 py-2 cursor-pointer bg-white text-black font-semibold hover:bg-gray-200 transition-all">
+              Try It Now
+            </button>
+            <button className="px-8 py-2 cursor-pointer border border-white/40 text-gray-300 hover:bg-white/10 transition-all">
+              Learn More
+            </button>
+          </div>
+
+          {/* Upload Section */}
+          <div className="bg-[#111111] border border-white/10 shadow-lg w-full max-w-xl">
+            {/* Mac-style header */}
+            <div className="flex items-center space-x-2 px-4 py-2 border-b border-white/10">
+              <div className="w-3 h-3 rounded-full bg-red-500" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500" />
+              <div className="w-3 h-3 rounded-full bg-green-500" />
+            </div>
+
+            {/* File input area */}
+            <div className="flex flex-col items-center justify-center py-10 px-6 text-gray-400">
+              <p className="mb-4">Drop your file here or click to upload</p>
+              <label className="cursor-pointer px-6 py-3 border border-dashed border-gray-600 hover:bg-white/5 transition">
+                <input type="file" className="hidden" />
+                <span>Choose File</span>
+              </label>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
+
+        {/* Second Section (Scrollable Area) */}
+        <section className="min-h-screen flex flex-col items-center justify-center text-center px-6">
+          {/* Add whatever you want here */}
+          <h2 className="text-4xl font-semibold mb-4">Second Section</h2>
+          <p className="text-gray-400 max-w-xl">
+            This section makes the website scrollable. You can add more content,
+            images, or components here. The background stays fixed while the
+            content scrolls.
+          </p>
+        </section>
+      </div>
     </div>
   );
 }
