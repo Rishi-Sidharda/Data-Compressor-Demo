@@ -116,7 +116,7 @@ export default function Home() {
       </nav>
 
       {/* Scrollable content */}
-      <div className="relative z-10">
+      <div className="relative z-10 pt-[5vh]">
         {/* Hero Section */}
         <main
           className={`flex flex-col items-center justify-center min-h-screen text-center px-4 sm:px-6 ${geistMono.className}`}
@@ -155,7 +155,14 @@ export default function Home() {
             >
               Try It Now
             </button>
-            <button className="px-8 py-2 cursor-pointer border border-white/40 text-gray-300 hover:bg-white/10 transition-all text-sm sm:text-base">
+            <button
+              onClick={() => {
+                window.open(
+                  "https://www.youtube.com/watch?v=xvFZjo5PgG0&list=RDxvFZjo5PgG0&start_radio=1"
+                );
+              }}
+              className="px-8 py-2 cursor-pointer border border-white/40 text-gray-300 hover:bg-white/10 transition-all text-sm sm:text-base"
+            >
               Learn More
             </button>
           </div>
@@ -175,7 +182,7 @@ export default function Home() {
                 Drop your file here or click to upload
               </p>
               <label className="cursor-pointer px-6 py-3 border border-dashed border-gray-600 hover:bg-white/5 transition rounded-md">
-                <input type="file" className="hidden" />
+                <input type="" className="hidden" />
                 <span>Choose File</span>
               </label>
             </div>
