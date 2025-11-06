@@ -14,21 +14,6 @@ const geistMono = Geist_Mono({
 export default function Home() {
   return (
     <div className="min-h-screen w-full bg-black text-white relative overflow-x-hidden">
-      {/* Background subtle glow (now fixed) */}
-      <div
-        className="fixed inset-0 z-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(
-              circle at center,
-              rgba(255, 255, 255, 0.08) 0%,
-              rgba(255, 255, 255, 0.04) 25%,
-              rgba(0, 0, 0, 0.0) 70%
-            )
-          `,
-        }}
-      />
-
       {/* Navbar (unchanged) */}
       <div className="w-full h-[7%] fixed top-0 left-0 bg-black border-b border-[#808080]/50 flex items-center justify-between pl-6 z-20">
         {/* Left side */}
@@ -77,17 +62,17 @@ export default function Home() {
       </div>
 
       {/* Scrollable content area */}
-      <div className="relative z-10 ">
+      <div className="relative z-10">
         {/* Main Hero Section */}
         <main
           className={`flex flex-col items-center justify-center min-h-screen text-center px-6 ${geistMono.className}`}
         >
           {/* Illustration (optional) */}
-          <div className="flex justify-center mb-10">
+          <div className="flex justify-center">
             <img
-              src="/your-illustration.png"
+              src="/compression.png"
               alt="Illustration"
-              className="w-64 h-auto opacity-90"
+              className="w-100 h-auto opacity-90"
             />
           </div>
 
