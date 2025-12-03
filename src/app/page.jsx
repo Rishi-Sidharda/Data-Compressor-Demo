@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { FaGithub, FaXTwitter } from "react-icons/fa6";
-import { Router } from "next/router";
+import LightRays from "@/components/LightRays";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,40 +15,79 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// 1. Import the localFont function
+import localFont from "next/font/local";
+
+// 2. Configure the font loading
+// The 'src' path is relative to the project root (not the component file)
+const excali = localFont({
+  src: "../../public/fonts/excali.woff2",
+  variable: "--font-excali", // Optional: Use a CSS variable
+  display: "swap",
+});
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = ["helo_", "docs", "changelogs", "blogs", "community"];
 
+  const teamRoles = [
+    { role: "Chief Executive Officer (CEO)", members: ["Rishi"] },
+    { role: "Chief Financial Officer (CFO)", members: ["Panya"] },
+    {
+      role: "Research & Strategy Team",
+      members: ["Rishi", "Rohith", "Sasank"],
+    },
+    { role: "Technical Development Team", members: ["Praveen", "Thanveer"] },
+    { role: "Marketing & Outreach Team", members: ["Sarwan", "Swaroop"] },
+    { role: "Human Resources (HR)", members: ["Baswanth"] },
+  ];
+
   return (
     <div className="min-h-screen w-full bg-black text-white relative overflow-x-hidden">
-      {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full bg-black border-b border-[#808080]/50 z-50">
+      {/* ---- 🔥 LIGHT RAYS BACKGROUND ---- */}
+      <div className="absolute inset-0 pointer-events-none">
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#ffffff"
+          raysSpeed={1.5}
+          lightSpread={0.8}
+          rayLength={1.2}
+          followMouse={true}
+          mouseInfluence={0.1}
+          noiseAmount={0.1}
+          distortion={0.05}
+          className="custom-rays"
+        />
+      </div>
+      {/* ---------------------------------- */}
+
+      {/* NAVBAR */}
+      <nav className="fixed top-0 left-0 w-full bg-[#000100] border-b border-[#808080]/50 z-50">
         <div className="flex items-center justify-between px-4 sm:px-6 h-14">
-          {/* Left side (logo + title) */}
+          {/* Logo */}
           <div
-            className={`flex ${geistSans.className} font-mono items-center gap-2 sm:gap-3 text-white`}
+            className={`flex ${geistSans.className} font-mono items-center gap-2 sm:gap-3`}
           >
             <img
-              src="/fire.png" // make sure fire.png is in /public
+              src="/fire.png"
               alt="Logo"
-              className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
+              className="w-6 h-6 sm:w-8 sm:h-8 object-contain rounded-md"
             />
-            <h1 className="text-lg sm:text-xl font-mono">Byte Squeeze_</h1>
+            <h1 className="text-lg sm:text-xl font-mono">Data Slice_</h1>
           </div>
 
-          {/* Desktop links */}
+          {/* Desktop Nav */}
           <div className="hidden md:flex items-center font-mono text-gray-400 h-full">
             {navLinks.map((item, i) => (
               <div
                 key={i}
-                className="px-4 border-l border-[#808080]/50 h-full flex items-center hover:text-white hover:bg-white/10 transition-colors duration-200 cursor-pointer"
+                className="px-4 border-l border-[#808080]/50 h-full flex items-center hover:text-white hover:bg-white/10 transition cursor-pointer"
               >
                 {item}
               </div>
             ))}
-
-            <div className="px-4 border-l border-[#808080]/50 h-full flex items-center hover:text-white hover:bg-white/10 transition-colors duration-200">
+            <div className="px-4 border-l border-[#808080]/50 h-full flex items-center hover:bg-white/10">
               <a
                 href="https://github.com"
                 target="_blank"
@@ -57,8 +96,7 @@ export default function Home() {
                 <FaGithub size={20} />
               </a>
             </div>
-
-            <div className="px-4 border-x border-[#808080]/50 h-full flex items-center hover:text-white hover:bg-white/10 transition-colors duration-200">
+            <div className="px-4 border-x border-[#808080]/50 h-full flex items-center hover:bg-white/10">
               <a
                 href="https://twitter.com"
                 target="_blank"
@@ -69,138 +107,123 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
-            <button
-              className="text-gray-400 hover:text-white focus:outline-none"
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle menu"
-            >
-              {menuOpen ? "✕" : "☰"}
-            </button>
-          </div>
+          {/* Mobile Button */}
+          <button
+            className="md:hidden text-gray-400 hover:text-white"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? "✕" : "☰"}
+          </button>
         </div>
 
-        {/* Mobile dropdown menu */}
+        {/* Mobile Menu */}
         {menuOpen && (
           <div className="md:hidden bg-black border-t border-[#808080]/50 flex flex-col text-gray-300 font-mono">
             {navLinks.map((item, i) => (
               <div
                 key={i}
-                className="px-4 py-3 border-b border-[#808080]/40 hover:bg-white/10 hover:text-white cursor-pointer transition"
+                className="px-4 py-3 border-b border-[#808080]/40 hover:bg-white/10 hover:text-white"
               >
                 {item}
               </div>
             ))}
-
-            <div className="flex items-center justify-center gap-6 py-3 border-t border-[#808080]/50">
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition"
-              >
-                <FaGithub size={20} />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition"
-              >
-                <FaXTwitter size={20} />
-              </a>
+            <div className="flex items-center justify-center gap-6 py-3">
+              <FaGithub size={20} />
+              <FaXTwitter size={20} />
             </div>
           </div>
         )}
       </nav>
 
-      {/* Scrollable content */}
+      {/* MAIN CONTENT */}
       <div className="relative z-10 pt-[5vh]">
-        {/* Hero Section */}
         <main
-          className={`flex flex-col items-center justify-center min-h-screen text-center px-4 sm:px-6 ${geistMono.className}`}
+          className={`flex flex-col items-center justify-center min-h-screen text-center px-4 ${geistMono.className}`}
         >
-          {/* Illustration */}
           <div className="flex justify-center mb-6">
-            <img
-              src="/compression.png"
-              alt="Illustration"
-              className="w-64 sm:w-80 md:w-96 h-auto opacity-90"
-            />
+            <h1 className={`${excali.className} text-2xl`}>
+              Compression rates upto 90%
+            </h1>
           </div>
 
-          {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 sm:mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
             Compress Smarter. <br />
             <span className="text-gray-400">Safer, and Faster</span>
           </h1>
 
-          {/* Subtext */}
-          <p className="text-gray-400 max-w-2xl leading-relaxed mb-8 sm:mb-10 text-sm sm:text-base">
-            Byte Squeeze_ redefines compression by leveraging practical
-            collision limits — achieving real-world results where theory stops
-            short.
+          <p className="text-gray-400 max-w-2xl mb-8 text-sm sm:text-base">
+            Data Slice_ redefines compression by leveraging practical collision
+            limits — achieving real-world results where theory stops short.
           </p>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+          <div className="flex flex-col sm:flex-row gap-4 mb-10">
             <button
-              onClick={() => {
-                window.open(
-                  "https://www.youtube.com/watch?v=xvFZjo5PgG0&list=RDxvFZjo5PgG0&start_radio=1"
-                );
-              }}
-              className="px-8 py-2 cursor-pointer bg-white text-black font-semibold hover:bg-gray-200 transition-all text-sm sm:text-base"
+              onClick={() =>
+                window.open("https://www.youtube.com/watch?v=xvFZjo5PgG0")
+              }
+              className="px-8 py-2 bg-white text-black font-semibold hover:bg-gray-200"
             >
               Try It Now
             </button>
             <button
-              onClick={() => {
-                window.open(
-                  "https://www.youtube.com/watch?v=xvFZjo5PgG0&list=RDxvFZjo5PgG0&start_radio=1"
-                );
-              }}
-              className="px-8 py-2 cursor-pointer border border-white/40 text-gray-300 hover:bg-white/10 transition-all text-sm sm:text-base"
+              onClick={() =>
+                window.open("https://www.youtube.com/watch?v=xvFZjo5PgG0")
+              }
+              className="px-8 py-2 border border-white/40 text-gray-300 hover:bg-white/10"
             >
               Learn More
             </button>
           </div>
 
-          {/* Upload Section */}
-          <div className="bg-[#111111] border border-white/10 shadow-lg w-full max-w-md sm:max-w-xl rounded-lg overflow-hidden">
-            {/* Mac-style header */}
-            <div className="flex items-center space-x-2 px-4 py-2 border-b border-white/10">
-              <div className="w-3 h-3 rounded-full bg-red-500" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500" />
-              <div className="w-3 h-3 rounded-full bg-green-500" />
+          {/* Upload Box */}
+          <div className="bg-[#111111] border border-white/10 shadow-lg w-full max-w-md sm:max-w-xl rounded-lg">
+            <div className="flex items-center px-4 py-2 border-b border-white/10 space-x-2">
+              <div className="w-3 h-3 bg-red-500 rounded-full" />
+              <div className="w-3 h-3 bg-yellow-500 rounded-full" />
+              <div className="w-3 h-3 bg-green-500 rounded-full" />
             </div>
 
-            {/* File input area */}
-            <div className="flex flex-col items-center justify-center py-8 px-4 sm:px-6 text-gray-400 text-sm sm:text-base">
+            <div className="flex flex-col items-center py-8 px-4 text-gray-400">
               <p className="mb-4 text-center">
                 Drop your file here or click to upload
               </p>
-              <label className="cursor-pointer px-6 py-3 border border-dashed border-gray-600 hover:bg-white/5 transition rounded-md">
-                <input type="" className="hidden" />
+              <label className="cursor-pointer px-6 py-3 border border-dashed border-gray-600 hover:bg-white/5 rounded-md">
+                <input type="file" className="hidden" />
                 <span>Choose File</span>
               </label>
             </div>
           </div>
         </main>
 
-        {/* Team Section */}
-        <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl font-semibold mb-4">
-            Team Roles
-          </h2>
-          <div className="space-y-2 text-gray-400 text-sm sm:text-base">
-            <p>CEO - Rishi</p>
-            <p>CFO - Panya</p>
-            <p>Research team - Rishi, Rohith, Sasank</p>
-            <p>Technical team - Praveen, Thanveer</p>
-            <p>Marketing Team - Sarwan, Swaroop</p>
-            <p>HR - Baswanth</p>
+        {/* TEAM SECTION */}
+        <section
+          className={`flex flex-col items-center min-h-screen text-center px-4 py-20 ${geistMono.className}`}
+        >
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-3">The Team</h2>
+          <p className="text-gray-400 max-w-xl mb-12">
+            The individuals driving Data Slice_ forward with expertise and
+            dedication.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl w-full">
+            {teamRoles.map((team, index) => (
+              <div
+                key={index}
+                className="bg-[#111111] border border-white/10  p-6 hover:border-white/40"
+              >
+                <div className="text-lg sm:text-xl font-bold mb-2 border-b border-gray-700 pb-2">
+                  {team.role}
+                </div>
+                <p className="text-gray-400 mt-2">
+                  {team.members.map((name, i) => (
+                    <span key={i} className="text-white font-semibold">
+                      {name}
+                      {i < team.members.length - 1 && ", "}
+                    </span>
+                  ))}
+                </p>
+              </div>
+            ))}
           </div>
         </section>
       </div>
