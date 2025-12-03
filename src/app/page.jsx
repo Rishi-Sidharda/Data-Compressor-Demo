@@ -20,11 +20,6 @@ import localFont from "next/font/local";
 
 // 2. Configure the font loading
 // The 'src' path is relative to the project root (not the component file)
-const excali = localFont({
-  src: "../../public/fonts/excali.woff2",
-  variable: "--font-excali", // Optional: Use a CSS variable
-  display: "swap",
-});
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -140,12 +135,6 @@ export default function Home() {
         <main
           className={`flex flex-col items-center justify-center min-h-screen text-center px-4 ${geistMono.className}`}
         >
-          <div className="flex justify-center mb-6">
-            <h1 className={`${excali.className} text-2xl`}>
-              Compression rates upto 90%
-            </h1>
-          </div>
-
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
             Compress Smarter. <br />
             <span className="text-gray-400">Safer, and Faster</span>
