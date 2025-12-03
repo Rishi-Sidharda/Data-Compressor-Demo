@@ -176,8 +176,12 @@ export default function Home() {
               <p className="mb-4 text-center">
                 Drop your file here or click to upload
               </p>
-              <label className="cursor-pointer px-6 py-3 border border-dashed border-gray-600 hover:bg-white/5 rounded-md">
-                <input type="file" className="hidden" />
+              <label
+                onClick={() =>
+                  window.open("https://www.youtube.com/watch?v=xvFZjo5PgG0")
+                }
+                className="cursor-pointer px-6 py-3 border border-dashed border-gray-600 hover:bg-white/5 rounded-md"
+              >
                 <span>Choose File</span>
               </label>
             </div>
